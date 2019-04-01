@@ -69,11 +69,17 @@ defmodule PhoenixClient.Socket do
 
     params = Keyword.get(opts, :params, %{})
 
+    IO.puts("URI")
+    IO.inspect(uri)
+
     query =
       (uri.query || "")
+      |> IO.inspect()
       |> URI.decode_query()
+      |> IO.inspect()
       |> Map.put("vsn", protocol_vsn)
       |> Map.merge(params)
+      |> IO.inspect()
       |> URI.encode_query()
 
     url =
